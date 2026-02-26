@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Irene Apartments guest guide — Acharavi and Corfu beaches, tips, and local discoveries.">
+  <title>Guest Guide — Irene Apartments Corfu</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%230f766e' width='32' height='32' rx='6'/><path fill='white' d='M16 8l8 8h-5v8h-6v-8H8z'/></svg>" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1f7fb;
+      --bg-soft: #e5eef5;
+      --text: #334155;
+      --text-soft: #475569;
+      --border: #e2e8f0;
+      --accent: #0f766e;
+      --accent-hover: #0d9488;
+      --radius: 20px;
+      --radius-sm: 12px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.04);
+      --shadow-hover: 0 12px 32px rgba(0,0,0,0.06);
+      --content-width: 880px;
+    }
+    /* Background changes with scroll — different light sea tint per section */
+    body[data-section="acharavi"] { --bg: #f0f6fa; --bg-soft: #e4eef4; }
+    body[data-section="beaches"] { --bg: #eef5f9; --bg-soft: #e2ecf3; }
+    body[data-section="eat"] { --bg: #ecf4f8; --bg-soft: #e0eaf2; }
+    body[data-section="activities"] { --bg: #eaf2f7; --bg-soft: #dee8f0; }
+    body[data-section="practical"] { --bg: #e8f0f6; --bg-soft: #dce6ee; }
+    body[data-section="discover"] { --bg: #e6eef5; --bg-soft: #dae4ec; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* Scroll progress bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      z-index: 11;
+      transition: width 0.08s ease-out;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--text);
+      background: var(--bg);
+      background-image: linear-gradient(to right, #dce8ef 0%, transparent 16%, transparent 84%, #dce8ef 100%);
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+      overflow-x: hidden;
+    }
+    /* Blurred first photo behind content + side text */
+    .side-decor {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero, nav, main.content { position: relative; z-index: 1; }
+    .side-photo {
+      position: absolute;
+      inset: -40px;
+      width: calc(100% + 80px);
+      height: calc(100% + 80px);
+      left: -40px;
+      top: -40px;
+      background-image: url('assets/pier-averara-uMGvRxtWj-o-unsplash.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(12px);
+      transform: scale(1.05);
+      opacity: 0.6;
+      transition: transform 0.1s ease-out;
+    }
+    .side-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(241,247,251,0.4);
+      pointer-events: none;
+    }
+    .side-text {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      white-space: nowrap;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    body.scrolled .side-text { opacity: 0.55; }
+    .side-text-left { left: 1.5rem; }
+    .side-text-right { right: 1.5rem; transform: translateY(-50%) rotate(90deg); }
+    @media (max-width: 1100px) {
+      .side-photo { opacity: 0.1; }
+      .side-text { font-size: 0.65rem; letter-spacing: 0.25em; }
+    }
+    @media (max-width: 700px) {
+      .side-text { display: none !important; }
+      .side-photo { opacity: 0.6; }
+    }
+    h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-hover); }
+
+    /* Hero — full viewport like Visit Corfu. */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 400px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      border-bottom: none;
+    }
+    .hero .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 55%, rgba(0,0,0,0.12) 100%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .hero .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.75rem, 8vw, 4rem);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.35), 0 1px 1px rgba(0,0,0,0.9);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .hero .sub {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.96);
+      max-width: 38ch;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.65), 0 0 12px rgba(0,0,0,0.3), 0 1px 1px rgba(0,0,0,0.8);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .hero .whats-inside {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.95);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5), 0 0 8px rgba(0,0,0,0.25);
+    }
+    .hero .whats-inside span { display: flex; align-items: center; gap: 0.35rem; }
+    .hero .whats-inside .material-icons { font-size: 1.1rem; }
+    .hero .scroll-wrap {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(0,0,0,0.25);
+      border-radius: 999px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .hero .scroll-wrap:hover { background: rgba(0,0,0,0.35); }
+    .hero .scroll {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.95);
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.3);
+    }
+    .hero .scroll-arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid rgba(255,255,255,0.95);
+      border-bottom: 2px solid rgba(255,255,255,0.95);
+      transform: rotate(45deg);
+      animation: scroll-bounce 2s ease-in-out infinite;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(241,247,251,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: none;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+      padding: 0.9rem 1.5rem;
+    }
+    nav .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    nav a {
+      color: var(--text);
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    nav a .nav-icon { font-size: 1.1rem; opacity: 0.85; }
+    nav a:hover { color: var(--accent); }
+    @media (max-width: 700px) {
+      nav .nav-inner { justify-content: center; }
+    }
+
+    /* Scroll-reveal animation */
+    section.reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    section.reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      position: relative;
+      display: inline-block;
+    }
+    section h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      border-radius: 2px;
+      transition: width 0.5s ease-out;
+    }
+    section.in-view h2::after { width: 100%; }
+
+    /* Main content — smooth, flowing layout over blurred bg */
+    main.content {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      box-sizing: border-box;
+    }
+    section {
+      padding: 3.5rem 0;
+      margin-bottom: 1.5rem;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    section:last-of-type { margin-bottom: 0; }
+    #acharavi { padding: 1.5rem 0; }
+    /* Section title with Corfu background — smooth rounded */
+    .section-title-bg {
+      background-image: url('assets/corfu-old-town-alt.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding: 2.25rem 1.5rem;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .section-title-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.3));
+      pointer-events: none;
+    }
+    .section-title-bg h2 {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .section-title-bg h2::after {
+      background: rgba(255,255,255,0.5);
+    }
+    #acharavi .section-title-bg { background-position: 50% 0%; }
+    #beaches .section-title-bg {
+      background-image: url('assets/hit the beach/erik-karits-TZNJXoReaLk-unsplash.jpg');
+      background-position: center 40%;
+    }
+    #eat .section-title-bg {
+      background-image: url('assets/pier-averara-uMGvRxtWj-o-unsplash.jpg');
+      background-position: center 45%;
+    }
+    #activities .section-title-bg { background-position: 50% 65%; }
+    #practical .section-title-bg {
+      background-image: url('assets/calin-stan-ZIQWp4KruWc-unsplash.jpg');
+      background-position: center 50%;
+    }
+    #discover .section-title-bg {
+      background-image: url('assets/nguyen-minh-wTgOsJf-6j4-unsplash.jpg');
+      background-position: center 50%;
+    }
+    section h2 {
+      font-size: clamp(1.625rem, 4vw, 2.125rem);
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0;
+      border-bottom: none;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+    }
+    section p {
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+    }
+    .section-content > p {
+      max-width: 65ch;
+    }
+    /* Welcome message — prominent, seen */
+    .welcome-text {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-weight: 600;
+      margin: 0;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.9), 0 0 1px rgba(255,255,255,0.8);
+    }
+    #welcome { scroll-margin-top: 6rem; }
+
+    /* Quick tips callout — soft, no hard bar */
+    .quick-tips {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding: 1.35rem 1.5rem;
+      background: rgba(229,238,245,0.6);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.02);
+    }
+    .quick-tips-icon {
+      flex-shrink: 0;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .quick-tips-content {
+      font-size: 0.9375rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    .quick-tips strong { color: var(--text); }
+
+    /* Section backgrounds — scroll-bg sections use full-bleed image above; others keep rhythm */
+    .card-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.5);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+      border: none;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .card h3 { font-size: 1.0625rem; color: var(--text); margin-bottom: 0.35rem; font-weight: 600; letter-spacing: -0.02em; }
+    .card p { margin-bottom: 0.5rem; font-size: 0.9375rem; color: var(--text-soft); line-height: 1.6; }
+    .card .meta { font-size: 0.8125rem; color: var(--text-soft); }
+    .card a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Beaches carousel */
+    #beaches h2,
+    #beaches > .section-content > p {
+      text-align: center;
+    }
+    #beaches > .section-content > p { margin-top: 0.5rem; margin-left: auto; margin-right: auto; }
+    #eat > .section-content > p { text-align: center; margin-left: auto; margin-right: auto; }
+    .beach-carousel-wrap {
+      position: relative;
+      margin-top: 1.5rem;
+      padding: 0 3.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .beach-carousel-view {
+      overflow: hidden;
+      width: 100%;
+    }
+    .beach-carousel-track {
+      display: flex;
+      gap: 1.25rem;
+      transition: transform 0.35s ease-out;
+      will-change: transform;
+    }
+    .beach-card {
+      flex: 0 0 calc((100% - 2 * 1.25rem) / 3);
+      min-width: 0;
+      background: rgba(255,255,255,0.45);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: none;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .beach-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .beach-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--bg-soft) 0%, var(--accent) 60%);
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .beach-card-content { padding: 1.15rem 1.25rem; }
+    .beach-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .beach-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 0.6rem;
+      background: rgba(229,238,245,0.7);
+      color: var(--text-soft);
+      border-radius: 999px;
+    }
+    .beach-card h3 {
+      font-size: 1.125rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .beach-card p {
+      font-size: 0.9375rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .beach-read-more {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--accent);
+      color: #fff !important;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .beach-read-more:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: background 0.2s, opacity 0.2s;
+      z-index: 2;
+    }
+    .carousel-arrow:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+    .carousel-arrow:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .carousel-arrow#beachPrev { left: 0.5rem; }
+    .carousel-arrow#beachNext { right: 0.5rem; }
+    .carousel-arrow:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .beach-card { flex: 0 0 calc((100% - 1.25rem) / 2); }
+    }
+    @media (max-width: 600px) {
+      .beach-card { flex: 0 0 100%; }
+    }
+    @media (max-width: 400px) {
+      .beach-carousel-wrap { padding: 0 2.5rem; }
+      .carousel-arrow { width: 40px; height: 40px; font-size: 1.25rem; }
+      .carousel-arrow#beachPrev { left: 0.25rem; }
+      .carousel-arrow#beachNext { right: 0.25rem; }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: var(--accent);
+      color: #fff !important;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover { background: var(--accent-hover); transform: scale(1.02); text-decoration: none; }
+
+    /* Eat & Drink — creative cards */
+    #eat .eat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .eat-card {
+      background: rgba(255,255,255,0.45);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      border: none;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .eat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    .eat-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      background: rgba(229,238,245,0.8);
+      color: var(--accent);
+    }
+    .eat-card-icon .material-icons {
+      font-size: 28px;
+    }
+    .eat-card h3 {
+      font-size: 0.8125rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+    }
+    .eat-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .eat-tag {
+      display: inline-block;
+      padding: 0.4rem 0.875rem;
+      background: var(--bg-soft);
+      color: var(--text);
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    #eat .eat-tip {
+      margin-top: 2rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+    #eat .eat-tip + .eat-tip { margin-top: 2.5rem; }
+    #eat .local-products-list {
+      list-style: none;
+      margin: 0.75rem 0 0;
+      padding: 0;
+    }
+    #eat .local-products-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-soft);
+      text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+    }
+    #eat .local-products-list li:last-child { border-bottom: none; }
+    #eat .local-products-list strong { color: var(--text); font-weight: 600; }
+    #eat .local-products-title {
+      margin: 0;
+      font-size: 1.0625rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.4;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+    }
+    @media (max-width: 700px) {
+      #eat .eat-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Activities */
+    #activities .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    #activities .activity-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 1.25rem;
+      background: rgba(255,255,255,0.4);
+      border: none;
+      border-radius: var(--radius);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    #activities .activity-link:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+    #activities .activity-link .material-icons {
+      font-size: 24px;
+      color: var(--accent);
+    }
+    #activities .activity-link-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    #activities .activity-link-title {
+      font-weight: 500;
+    }
+    #activities .activity-link-sub {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      font-weight: 400;
+    }
+
+    /* Need to know — list with icons */
+    .practical-list { margin-top: 0.5rem; }
+    .practical-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .practical-item:last-child { border-bottom: none; }
+    .practical-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-soft);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+    }
+    .practical-icon .material-icons { font-size: 22px; }
+    .practical-text { flex: 1; min-width: 0; }
+    .contact-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .contact-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--accent);
+      color: #fff !important;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-cta a:hover { background: var(--accent-hover); transform: scale(1.03); color: #fff; }
+    .contact-cta a.secondary {
+      background: var(--bg-soft);
+      color: var(--text) !important;
+      border: 1px solid var(--border);
+    }
+    .contact-cta a.secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-cta .material-icons { font-size: 1.1rem; }
+
+    /* Lists */
+    ul.list {
+      list-style: none;
+      margin: 1rem 0;
+    }
+    ul.list li {
+      padding: 0.45rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    ul.list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: rgba(229,238,245,0.6);
+      color: var(--text-soft);
+      font-size: 0.9375rem;
+      border: none;
+      border-radius: var(--radius) var(--radius) 0 0;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.03);
+      line-height: 1.6;
+    }
+    footer a { color: var(--accent); }
+    footer p { margin-bottom: 0.5rem; }
+    footer strong { color: var(--text); font-weight: 600; }
+    .footer-hint {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* Map */
+    .map-wrap {
+      width: 100%;
+      margin: 1.5rem 0 0;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-soft);
+      border-radius: 0;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+      display: block;
+    }
+    .map-block {
+      background: rgba(229,238,245,0.5);
+      margin: 2rem 0;
+      border: none;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+    }
+    .map-block .map-caption {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      text-align: center;
+      padding: 1rem 1.5rem 2rem;
+      max-width: var(--content-width);
+      margin: 0 auto;
+    }
+    .map-caption a { font-weight: 500; }
+
+    /* Back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s;
+      z-index: 9;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .back-to-top:hover { background: var(--accent-hover); transform: translateY(0) scale(1.05); }
+    .back-to-top .material-icons { font-size: 24px; }
+
+    /* Nav active section */
+    nav a.active { color: var(--accent); font-weight: 600; }
+
+    /* ========== Mobile only (phone) — PC experience unchanged ========== */
+    @media (max-width: 768px) {
+      #welcome { scroll-margin-top: 9rem; }
+      section[id] { scroll-margin-top: 7rem; }
+      main.content { padding: 1.75rem 1rem 3rem; }
+      section { padding: 2.5rem 0 1.5rem; }
+      #acharavi { padding: 3.5rem 0 1.25rem 0; }
+      .section-title-bg { padding: 1.75rem 1rem; margin-bottom: 1.25rem; border-radius: 14px; }
+      .section-title-bg h2 { font-size: 1.5rem; }
+      .welcome-text { font-size: 1.125rem; }
+      nav { padding: 0.65rem 0.75rem; }
+      nav ul { gap: 0.5rem 0.75rem; font-size: 0.8125rem; }
+      nav a { padding: 0.5rem 0.6rem; min-height: 44px; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; tap-highlight-color: transparent; }
+      nav a .nav-icon { font-size: 1.25rem; }
+      nav a:focus { outline: none; }
+      .btn { padding: 0.65rem 1.5rem; min-height: 44px; display: inline-flex; align-items: center; font-size: 1rem; }
+      .contact-cta { gap: 0.5rem; }
+      .contact-cta a { padding: 0.75rem 1.25rem; min-height: 44px; }
+      .contact-cta a.secondary { padding: 0.75rem 1.25rem; min-height: 44px; }
+      .back-to-top { width: 52px; height: 52px; bottom: 1.25rem; right: 1rem; }
+      .back-to-top .material-icons { font-size: 26px; }
+      .beach-carousel-wrap { padding: 0 2.75rem; }
+      .carousel-arrow { width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
+      .carousel-arrow#beachPrev { left: 0.35rem; }
+      .carousel-arrow#beachNext { right: 0.35rem; }
+      .beach-card-content { padding: 1rem 1rem; }
+      .beach-card h3 { font-size: 1.0625rem; }
+      .beach-card p { font-size: 0.9375rem; }
+      .eat-card { padding: 1.25rem; }
+      .eat-card-icon { width: 44px; height: 44px; margin-bottom: 0.75rem; }
+      .eat-card-icon .material-icons { font-size: 26px; }
+      .eat-card h3 { font-size: 0.8125rem; }
+      .eat-tag { padding: 0.5rem 0.75rem; }
+      #activities .activity-link { padding: 1rem 1rem; min-height: 48px; }
+      #activities .activity-link .material-icons { font-size: 26px; }
+      .practical-item { padding: 1rem 0; }
+      .practical-icon { width: 44px; height: 44px; }
+      .practical-icon .material-icons { font-size: 22px; }
+      .map-wrap iframe { height: 280px; }
+      .map-block .map-caption { padding: 0.75rem 1rem 1.5rem; }
+      footer { padding: 2rem 1rem; font-size: 0.9375rem; }
+      .card { padding: 1.25rem 1rem; }
+      .card.contact-card h3 { font-size: 1rem; }
+    }
+
+    /* Print */
+    @media print {
+      .hero { min-height: 40vh; }
+      nav, .back-to-top, .scroll-progress { display: none !important; }
+      .section-title-bg { break-inside: avoid; }
+      section { break-inside: avoid; }
+      a[href^="http"]:after { content: " (" attr(href) ")"; font-size: 0.85em; color: #666; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .hero .scroll-arrow { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="side-decor" aria-hidden="true">
+    <div class="side-photo" id="sidePhoto"></div>
+    <div class="side-text side-text-left">Discover Corfu · Beaches · Sun · Sea</div>
+    <div class="side-text side-text-right">Irene Apartments · Acharavi</div>
+  </div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="assets/pier-averara-uMGvRxtWj-o-unsplash.jpg" alt="Corfu Old Town and harbour" width="1920" height="1080" fetchpriority="high" decoding="async">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-badge">Your guide to Acharavi & Corfu</p>
+      <h1>Irene Apartments</h1>
+      <p class="sub">Beaches, food, and local tips — everything you need to make the most of your stay.</p>
+      <div class="whats-inside">
+        <span><span class="material-icons">beach_access</span> Beaches</span>
+        <span><span class="material-icons">restaurant</span> Eat & Drink</span>
+        <span><span class="material-icons">explore</span> Things to do</span>
+        <span><span class="material-icons">map</span> Map & tips</span>
+      </div>
+      <a href="#welcome" class="scroll-wrap" aria-label="Scroll to content">
+        <p class="scroll">Scroll to explore</p>
+        <div class="scroll-arrow" aria-hidden="true"></div>
+      </a>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-inner">
+      <ul>
+        <li><a href="#welcome"><span class="material-icons nav-icon">home</span> Your base</a></li>
+        <li><a href="#beaches"><span class="material-icons nav-icon">beach_access</span> Beaches</a></li>
+        <li><a href="#eat"><span class="material-icons nav-icon">restaurant</span> Eat & Drink</a></li>
+        <li><a href="#activities"><span class="material-icons nav-icon">tour</span> Things to do</a></li>
+        <li><a href="#practical"><span class="material-icons nav-icon">help_outline</span> Need to know</a></li>
+        <li><a href="#discover"><span class="material-icons nav-icon">explore</span> Explore</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="content">
+  <section id="acharavi" class="reveal">
+    <div class="section-content">
+      <p id="welcome" class="welcome-text">Welcome! We're glad you're here and we're always happy to help with tips and bookings.</p>
+    </div>
+  </section>
+
+  <section id="beaches" class="reveal">
+    <div class="section-content">
+      <div class="section-title-bg">
+        <h2>Hit the beach</h2>
+      </div>
+      <p>Highlights close to Acharavi and a short drive away.</p>
+      <div class="beach-carousel-wrap">
+      <button type="button" class="carousel-arrow" id="beachPrev" aria-label="Previous beach">&#10094;</button>
+      <button type="button" class="carousel-arrow" id="beachNext" aria-label="Next beach">&#10095;</button>
+      <div class="beach-carousel-view">
+      <div class="beach-carousel-track" id="beachTrack">
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/acharavi-beach.png');"></div>
+          <div class="beach-card-content">
+            <h3>Acharavi Beach</h3>
+            <p>Long, organised beach right in front of the village — cosmopolitan in the centre, quieter at the ends. Views to Erikousa. Sunbeds, watersports, tavernas behind.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/Almyros%20Beach.webp');"></div>
+          <div class="beach-card-content">
+            <h3>Almyros Beach</h3>
+            <p>Long sandy beach next to Acharavi. It isn’t organised — no sunbeds or facilities — so it’s ideal if you prefer a more natural, quiet stretch of sand. Bring your own shade and supplies.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/roda-beach.png');"></div>
+          <div class="beach-card-content">
+            <h3>Roda</h3>
+            <p>Next village west of Acharavi. Sandy beach, shallow water, very family-friendly. More bars and restaurants along the front.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/Canal-DAmour.jpg');"></div>
+          <div class="beach-card-content">
+            <h3>Canal d’Amour (Sidari)</h3>
+            <p>Famous rock formations and narrow channel. Unique scenery and a popular photo spot. Sandy coves and organised beach.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/porto-timoni.png');"></div>
+          <div class="beach-card-content">
+            <div class="beach-card-tags"><span class="beach-tag">Hidden gem</span><span class="beach-tag">Walk</span></div>
+            <h3>Porto Timoni</h3>
+            <p>Two stunning bays (double beach) near Afionas. A short walk down from the village — one of Corfu’s most beautiful spots. Less organised; take water and shoes for the path.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/kerassia-beach.png');"></div>
+          <div class="beach-card-content">
+            <div class="beach-card-tags"><span class="beach-tag">Quieter</span><span class="beach-tag">Diving</span></div>
+            <h3>Kerassia</h3>
+            <p>Quieter beach east along the north coast. Good for diving and a relaxed day by the sea.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/kassiopi.png');"></div>
+          <div class="beach-card-content">
+            <div class="beach-card-tags"><span class="beach-tag">Harbour</span><span class="beach-tag">Lively</span></div>
+            <h3>Kassiopi</h3>
+            <p>Charming harbour village on the northeast coast with a Byzantine castle, pebble and sand beaches, and plenty of tavernas and bars. Popular and lively in season.</p>
+          </div>
+        </div>
+        <div class="beach-card">
+          <div class="beach-card-img" style="background-image: url('assets/agios-spyridon.png');"></div>
+          <div class="beach-card-content">
+            <div class="beach-card-tags"><span class="beach-tag">Relaxed</span><span class="beach-tag">Quieter</span></div>
+            <h3>Agios Spiridon</h3>
+            <p>Small resort and beach area on the north coast. Relaxed atmosphere, clear waters, and easy access. Good for a quiet day by the sea.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="eat" class="reveal">
+    <div class="section-content">
+      <div class="section-title-bg">
+        <h2>Eat & Drink</h2>
+      </div>
+      <p>All suggestions below are in and around Acharavi.</p>
+      <div class="eat-grid">
+      <div class="eat-card coffee">
+        <div class="eat-card-icon" aria-hidden="true"><span class="material-icons">free_breakfast</span></div>
+        <h3>Coffee & breakfast</h3>
+        <div class="eat-tags">
+          <span class="eat-tag">Istros</span>
+          <span class="eat-tag">See you</span>
+          <span class="eat-tag">Macheimaris Bakery</span>
+          <span class="eat-tag">Ilo-Ilo</span>
+        </div>
+      </div>
+      <div class="eat-card cocktails">
+        <div class="eat-card-icon" aria-hidden="true"><span class="material-icons">local_bar</span></div>
+        <h3>Cocktails</h3>
+        <div class="eat-tags">
+          <span class="eat-tag">Fuego</span>
+          <span class="eat-tag">Barden</span>
+          <span class="eat-tag">Kontesa</span>
+          <span class="eat-tag">Eretrico</span>
+        </div>
+      </div>
+      <div class="eat-card eat">
+        <div class="eat-card-icon" aria-hidden="true"><span class="material-icons">restaurant</span></div>
+        <h3>Eat</h3>
+        <div class="eat-tags">
+          <span class="eat-tag">Pumphouse</span>
+          <span class="eat-tag">Filaraki</span>
+          <span class="eat-tag">Faros</span>
+          <span class="eat-tag">Andromeda</span>
+          <span class="eat-tag">Maestro</span>
+          <span class="eat-tag">Prasinos</span>
+          <span class="eat-tag">Angelos</span>
+          <span class="eat-tag">Odysseus</span>
+          <span class="eat-tag">Roxannes</span>
+        </div>
+      </div>
+    </div>
+      <p class="eat-tip">Try <strong>pastitsada</strong>, <strong>sofrito</strong>, and <strong>bourdeto</strong> — classic Corfiot dishes.</p>
+      <div class="eat-tip">
+        <p class="local-products-title">Must-try local treats</p>
+        <ul class="local-products-list">
+          <li><strong>Koum-kuat (kumquat)</strong> – Corfu’s signature citrus fruit, used to make liqueur, marmalades, candied fruit and sweets.</li>
+          <li><strong>Νούμπουλο (noumboulo)</strong> – A traditional Corfiot cured pork fillet, marinated in wine and spices, then smoked — excellent as a meze or gift.</li>
+          <li><strong>Corfiot beer</strong> – Fresh, artisanal beers produced locally (several microbreweries on the island).</li>
+          <li><strong>Μανδολάτο (mandolato)</strong> – Soft nougat with almonds and honey.</li>
+          <li><strong>Mandoles</strong> – Candied or caramelised almonds.</li>
+          <li><strong>Loukoumi (lokum)</strong> – Greek delight, often locally flavoured (kumquat or citrus).</li>
+          <li><strong>Corfiot ginger beer (Tsitstibira)</strong> – A refreshing, traditional non-alcoholic drink made with ginger and lemon.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities" class="reveal">
+    <div class="section-content">
+      <div class="section-title-bg">
+        <h2>Things to do</h2>
+      </div>
+      <div class="activities-grid">
+      <a href="#" class="activity-link">
+        <span class="material-icons">sailing</span>
+        <span class="activity-link-text"><span class="activity-link-title">Day Cruise</span><span class="activity-link-sub">Paxos & Albania</span></span>
+      </a>
+      <a href="#" class="activity-link"><span class="material-icons">sailing</span> Boat trips & sea</a>
+      <a href="#" class="activity-link"><span class="material-icons">scuba_diving</span> Diving & snorkelling</a>
+      <a href="#" class="activity-link"><span class="material-icons">hiking</span> Hiking & nature</a>
+      <a href="#" class="activity-link"><span class="material-icons">museum</span> Culture & sights</a>
+      <a href="#" class="activity-link"><span class="material-icons">landscape</span> Horse riding</a>
+      <a href="#" class="activity-link"><span class="material-icons">directions_bike</span> Bicycle tours</a>
+      <a href="#" class="activity-link"><span class="material-icons">waves</span> Watersports</a>
+      <a href="#" class="activity-link"><span class="material-icons">pool</span> Waterpark</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="practical" class="reveal">
+    <div class="section-content">
+      <div class="section-title-bg">
+        <h2>Need to know</h2>
+      </div>
+      <div class="card contact-card" style="margin-bottom: 1.25rem;">
+      <h3>Irene Apartments — Need help?</h3>
+      <p class="meta">Acharavi 490 81 · <a href="mailto:info@irene-acharavi.gr">info@irene-acharavi.gr</a></p>
+      <div class="contact-cta">
+        <a href="tel:+306976447997"><span class="material-icons">call</span> Call Us</a>
+        <a href="https://www.google.com/maps/search/Acharavi+Corfu+Greece" target="_blank" rel="noopener" class="secondary"><span class="material-icons">map</span> Open in Maps</a>
+        <a href="https://irenecorfu.com/" target="_blank" rel="noopener" class="secondary">irenecorfu.com →</a>
+      </div>
+    </div>
+    <div class="practical-list">
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">directions_bus</span></span>
+        <div class="practical-text"><strong>Buses:</strong> Green buses (KTEL) run to/from Corfu Town. <a href="https://ktelkerkyras.gr/en/itinerary/" target="_blank" rel="noopener">Official timetable (KTEL Corfu)</a> · Or ask reception.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">two_wheeler</span></span>
+        <div class="practical-text"><strong>Car / scooter:</strong> We can arrange rentals for you — ask at reception. Ideal for exploring the north and the rest of the island.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">local_pharmacy</span></span>
+        <div class="practical-text"><strong>Pharmacies & ATM:</strong> In Acharavi centre.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">emergency</span></span>
+        <div class="practical-text"><strong>Emergency:</strong> European emergency number <strong>112</strong>. For medical help, ask reception or at the pharmacy.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">water_drop</span></span>
+        <div class="practical-text"><strong>Water:</strong> Tap water is generally not for drinking; use bottled water.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">route</span></span>
+        <div class="practical-text"><strong>Roads:</strong> Be careful on the roads — many lanes are narrow, and scooters and bikes are common. Drive on the right.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">bug_report</span></span>
+        <div class="practical-text"><strong>Mosquitoes:</strong> They can be around, especially in the evening. Repellent and plug-in deterrents help; you can buy them at the pharmacy or supermarket.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">bathroom</span></span>
+        <div class="practical-text"><strong>Toilets:</strong> In many places in Greece you don’t flush toilet paper — use the bin next to the toilet. This is normal and helps avoid blockages.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">payments</span></span>
+        <div class="practical-text"><strong>Cash:</strong> Many tavernas and small shops prefer or only take cash. There’s an ATM in Acharavi centre.</div>
+      </div>
+      <div class="practical-item">
+        <span class="practical-icon" aria-hidden="true"><span class="material-icons">translate</span></span>
+        <div class="practical-text"><strong>Few Greek words:</strong> <em>Kalimera</em> (good morning), <em>Efharisto</em> (thank you), <em>Parakalo</em> (please / you’re welcome). Greeks appreciate the effort.</div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="discover" class="reveal">
+    <div class="section-content">
+      <div class="section-title-bg">
+        <h2>Explore the island</h2>
+      </div>
+      <p>Corfu has a rich mix of history, culture, and nature — UNESCO sites, museums, villages, and stunning coastlines. For detailed guides, events, and inspiration, the official site is an excellent resource.</p>
+      <p><a href="https://visit.corfu.gr/" target="_blank" rel="noopener" class="btn">Explore visit.corfu.gr →</a></p>
+      <p style="margin-top: 1.5rem; font-size: 0.95rem;">Highlights worth a trip: <strong>Corfu Old Town</strong> (UNESCO), <strong>Paleokastritsa</strong>, <strong>Achilleion Palace</strong>, <strong>Canal d’Amour</strong>, and <strong>Pontikonisi</strong>.</p>
+    </div>
+  </section>
+
+  <div class="map-block">
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=Acharavi+Corfu+Greece&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Acharavi, Corfu on map"></iframe>
+    </div>
+    <p class="map-caption"><a href="https://www.google.com/maps/search/Acharavi+Corfu+Greece" target="_blank" rel="noopener">View larger map</a></p>
+  </div>
+
+  </main>
+
+  <footer>
+    <p><strong>Irene Apartments</strong> — Acharavi, Corfu</p>
+    <p>Thank you for staying with us. Make the most of every day — beach, food, and adventure are right here.</p>
+    <p><a href="https://irenecorfu.com/" target="_blank" rel="noopener">irenecorfu.com</a> · <a href="https://visit.corfu.gr/" target="_blank" rel="noopener">visit.corfu.gr</a> — Discover the island</p>
+    <p class="footer-hint">Save this page to your home screen for quick access. We’d love to see your photos — share your stay with us.</p>
+  </footer>
+
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top"><span class="material-icons">arrow_upward</span></button>
+
+  <script>
+    (function() {
+      var bar = document.getElementById('scrollProgress');
+      var sidePhoto = document.getElementById('sidePhoto');
+      function onScroll() {
+        var y = window.scrollY;
+        if (bar) {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+        }
+        document.body.classList.toggle('scrolled', y > 320);
+        var parallax = y * 0.2;
+        if (sidePhoto) sidePhoto.style.transform = 'scale(1.05) translateY(' + parallax + 'px)';
+      }
+      window.addEventListener('scroll', onScroll);
+      window.addEventListener('load', onScroll);
+      onScroll();
+    })();
+    (function() {
+      var sections = document.querySelectorAll('section.reveal');
+      function checkReveal() {
+        sections.forEach(function(section) {
+          var rect = section.getBoundingClientRect();
+          var inView = rect.top < window.innerHeight - 80;
+          if (inView) section.classList.add('in-view');
+        });
+      }
+      window.addEventListener('scroll', checkReveal);
+      window.addEventListener('load', checkReveal);
+      checkReveal();
+    })();
+    (function() {
+      var track = document.getElementById('beachTrack');
+      var prevBtn = document.getElementById('beachPrev');
+      var nextBtn = document.getElementById('beachNext');
+      if (!track || !prevBtn || !nextBtn) return;
+      var cards = track.querySelectorAll('.beach-card');
+      var total = cards.length;
+      var index = 0;
+      function getMaxIndex() {
+        var view = track.parentElement;
+        if (!view) return total - 1;
+        var cardWidth = cards[0] ? cards[0].offsetWidth : 300;
+        var style = getComputedStyle(track);
+        var gap = parseFloat(style.gap) || 20;
+        var visibleCount = Math.min(3, Math.floor((view.offsetWidth + gap) / (cardWidth + gap)));
+        return Math.max(0, total - visibleCount);
+      }
+      function cardStep() {
+        var card = cards[0];
+        if (!card) return 0;
+        var style = getComputedStyle(track);
+        var gap = parseFloat(style.gap) || 20;
+        return card.offsetWidth + gap;
+      }
+      function updatePosition() {
+        var step = cardStep();
+        var maxIdx = getMaxIndex();
+        index = Math.min(index, maxIdx);
+        track.style.transform = 'translateX(-' + (index * step) + 'px)';
+        prevBtn.disabled = index <= 0;
+        nextBtn.disabled = index >= maxIdx;
+      }
+      prevBtn.addEventListener('click', function() {
+        if (index > 0) { index--; updatePosition(); }
+      });
+      nextBtn.addEventListener('click', function() {
+        var maxIdx = getMaxIndex();
+        if (index < maxIdx) { index++; updatePosition(); }
+      });
+      window.addEventListener('resize', updatePosition);
+      updatePosition();
+    })();
+    (function() {
+      var backToTop = document.getElementById('backToTop');
+      var nav = document.querySelector('nav');
+      var navLinks = nav ? nav.querySelectorAll('a[href^="#"]') : [];
+      var sections = document.querySelectorAll('section[id]');
+      var navClickUntil = 0;
+      function setActiveFromSection(activeSectionId) {
+        navLinks.forEach(function(a) {
+          a.classList.remove('active');
+          var href = a.getAttribute('href');
+          if (!activeSectionId) return;
+          var isFirst = (activeSectionId === 'acharavi');
+          if ((href === '#' + activeSectionId) || (isFirst && href === '#welcome')) {
+            a.classList.add('active');
+          }
+        });
+      }
+      function onScroll() {
+        if (backToTop) {
+          if (window.scrollY > 400) backToTop.classList.add('visible');
+          else backToTop.classList.remove('visible');
+        }
+        if (Date.now() < navClickUntil) return;
+        var scrollY = window.scrollY;
+        var isMobile = window.innerWidth <= 768;
+        var offset = isMobile ? 100 : 150;
+        var top = scrollY + offset;
+        var activeSectionId = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          var s = sections[i];
+          var sectionTop = s.getBoundingClientRect().top + scrollY;
+          if (sectionTop <= top) {
+            document.body.setAttribute('data-section', s.id);
+            activeSectionId = s.id;
+            break;
+          }
+        }
+        if (!activeSectionId && sections.length) {
+          document.body.setAttribute('data-section', sections[0].id);
+          activeSectionId = sections[0].id;
+        }
+        setActiveFromSection(activeSectionId);
+      }
+      navLinks.forEach(function(a) {
+        a.addEventListener('click', function() {
+          var href = a.getAttribute('href');
+          if (href === '#') return;
+          var id = href.slice(1);
+          var sectionId = (id === 'welcome') ? 'acharavi' : id;
+          navClickUntil = Date.now() + 1200;
+          navLinks.forEach(function(link) { link.classList.remove('active'); });
+          a.classList.add('active');
+          document.body.setAttribute('data-section', sectionId);
+        });
+      });
+      if (backToTop) {
+        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      }
+      window.addEventListener('scroll', onScroll);
+      window.addEventListener('load', onScroll);
+    })();
+  </script>
+</body>
+</html>
