@@ -1,0 +1,8 @@
+# Netlify config for irene-guest-guide (static site)
+[build]
+  publish = "."
+  command = ""
+
+# Optional: force deploy from this branch if Netlify uses another default
+# [build.environment]
+#   NODE_VERSION = "18"
