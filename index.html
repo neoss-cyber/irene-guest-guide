@@ -1305,6 +1305,18 @@
 
   <script>
     (function() {
+      var scrollLink = document.querySelector('a.scroll-wrap[href="#welcome"]');
+      if (scrollLink) {
+        scrollLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          var el = document.getElementById('welcome');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      }
+    })();
+    (function() {
       function goTop() { window.scrollTo(0, 0); }
       window.scrollTo(0, 0);
       window.addEventListener('load', function() { goTop(); setTimeout(goTop, 0); });
