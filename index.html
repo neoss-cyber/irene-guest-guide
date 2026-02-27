@@ -935,7 +935,7 @@
     /* ========== Mobile only (phone) — PC experience unchanged ========== */
     @media (max-width: 768px) {
       #welcome { scroll-margin-top: 9rem; }
-      section[id] { scroll-margin-top: 7rem; }
+      section[id] { scroll-margin-top: 9rem; }
       main.content { padding: 1.75rem 1rem 3rem; }
       section { padding: 2.5rem 0 1.5rem; }
       #acharavi { padding: 3.5rem 0 1.25rem 0; }
@@ -1309,9 +1309,14 @@
       if (scrollLink) {
         scrollLink.addEventListener('click', function(e) {
           e.preventDefault();
-          var el = document.getElementById('welcome');
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var isPhone = window.innerWidth <= 768;
+          if (isPhone) {
+            var main = document.querySelector('main.content');
+            var y = main ? main.getBoundingClientRect().top + window.scrollY : 0;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else {
+            var el = document.getElementById('welcome');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         });
       }
