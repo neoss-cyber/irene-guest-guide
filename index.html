@@ -1313,10 +1313,17 @@
             e.preventDefault();
             var el = document.getElementById('welcome');
             var nav = document.querySelector('nav');
+            var hero = document.querySelector('header.hero');
             var navH = nav ? nav.offsetHeight : 80;
+            var heroH = hero ? hero.offsetHeight : 0;
             if (el) {
-              var y = el.getBoundingClientRect().top + window.scrollY - navH;
-              window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+              var rect = el.getBoundingClientRect();
+              var welcomeCenter = rect.top + rect.height / 2 + window.scrollY;
+              var viewportCenter = navH + (window.innerHeight - navH) / 2;
+              var y = welcomeCenter - viewportCenter;
+              y = Math.max(heroH, y);
+              y = Math.max(0, y);
+              window.scrollTo({ top: y, behavior: 'smooth' });
             }
           }
         });
