@@ -1311,9 +1311,13 @@
           var isPhone = window.innerWidth <= 768;
           if (isPhone) {
             e.preventDefault();
-            var main = document.querySelector('main.content');
-            var y = main ? main.getBoundingClientRect().top + window.scrollY : 0;
-            window.scrollTo({ top: y, behavior: 'smooth' });
+            var el = document.getElementById('welcome');
+            var nav = document.querySelector('nav');
+            var navH = nav ? nav.offsetHeight : 80;
+            if (el) {
+              var y = el.getBoundingClientRect().top + window.scrollY - navH;
+              window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            }
           }
         });
       }
