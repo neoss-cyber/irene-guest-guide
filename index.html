@@ -1308,15 +1308,12 @@
       var scrollLink = document.querySelector('a.scroll-wrap[href="#welcome"]');
       if (scrollLink) {
         scrollLink.addEventListener('click', function(e) {
-          e.preventDefault();
           var isPhone = window.innerWidth <= 768;
           if (isPhone) {
+            e.preventDefault();
             var main = document.querySelector('main.content');
             var y = main ? main.getBoundingClientRect().top + window.scrollY : 0;
             window.scrollTo({ top: y, behavior: 'smooth' });
-          } else {
-            var el = document.getElementById('welcome');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         });
       }
