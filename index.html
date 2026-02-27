@@ -11,6 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    history.scrollRestoration = 'manual';
+  </script>
   <style>
     :root {
       --bg: #f1f7fb;
@@ -1272,6 +1275,12 @@
   <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top"><span class="material-icons">arrow_upward</span></button>
 
   <script>
+    (function() {
+      function goTop() { window.scrollTo(0, 0); }
+      window.scrollTo(0, 0);
+      window.addEventListener('load', function() { goTop(); setTimeout(goTop, 0); });
+      window.addEventListener('pageshow', function(e) { if (!e.persisted) goTop(); });
+    })();
     (function() {
       var bar = document.getElementById('scrollProgress');
       var sidePhoto = document.getElementById('sidePhoto');
