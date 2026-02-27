@@ -1305,27 +1305,32 @@
 
   <script>
     (function() {
+      function scrollToWelcomeOnPhone() {
+        var el = document.getElementById('welcome');
+        var nav = document.querySelector('nav');
+        var hero = document.querySelector('header.hero');
+        var navH = nav ? nav.offsetHeight : 80;
+        var heroH = hero ? hero.offsetHeight : 0;
+        if (!el) return;
+        var rect = el.getBoundingClientRect();
+        var welcomeCenter = rect.top + rect.height / 2 + window.scrollY;
+        var viewportCenter = navH + (window.innerHeight - navH) / 2;
+        var y = welcomeCenter - viewportCenter;
+        y = Math.max(heroH, y);
+        y = Math.max(0, y);
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      var isPhone = function() { return window.innerWidth <= 768; };
       var scrollLink = document.querySelector('a.scroll-wrap[href="#welcome"]');
       if (scrollLink) {
         scrollLink.addEventListener('click', function(e) {
-          var isPhone = window.innerWidth <= 768;
-          if (isPhone) {
-            e.preventDefault();
-            var el = document.getElementById('welcome');
-            var nav = document.querySelector('nav');
-            var hero = document.querySelector('header.hero');
-            var navH = nav ? nav.offsetHeight : 80;
-            var heroH = hero ? hero.offsetHeight : 0;
-            if (el) {
-              var rect = el.getBoundingClientRect();
-              var welcomeCenter = rect.top + rect.height / 2 + window.scrollY;
-              var viewportCenter = navH + (window.innerHeight - navH) / 2;
-              var y = welcomeCenter - viewportCenter;
-              y = Math.max(heroH, y);
-              y = Math.max(0, y);
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }
-          }
+          if (isPhone()) { e.preventDefault(); scrollToWelcomeOnPhone(); }
+        });
+      }
+      var navWelcomeLink = document.querySelector('nav a[href="#welcome"]');
+      if (navWelcomeLink) {
+        navWelcomeLink.addEventListener('click', function(e) {
+          if (isPhone()) { e.preventDefault(); scrollToWelcomeOnPhone(); }
         });
       }
     })();
