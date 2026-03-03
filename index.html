@@ -246,6 +246,33 @@
       0%, 100% { transform: rotate(45deg) translateY(0); }
       50% { transform: rotate(45deg) translateY(6px); }
     }
+    .lang-switcher {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.25rem;
+      z-index: 2;
+    }
+    .lang-switcher button {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(0,0,0,0.2);
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: inherit;
+    }
+    .lang-switcher button:hover { background: rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.9); }
+    .lang-switcher button.active { background: rgba(255,255,255,0.95); color: var(--accent); border-color: #fff; }
+    @media (max-width: 768px) {
+      .lang-switcher { top: 0.75rem; right: 0.75rem; }
+      .lang-switcher button { padding: 0.4rem 0.7rem; min-height: 44px; font-size: 0.85rem; }
+    }
 
     /* Nav */
     nav {
@@ -1006,17 +1033,22 @@
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-badge">Your guide to Acharavi & Corfu</p>
-      <h1>Irene Apartments</h1>
-      <p class="sub">Beaches, food, and local tips — everything you need to make the most of your stay.</p>
+      <div class="lang-switcher" aria-label="Language">
+        <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+        <button type="button" data-lang="it" aria-pressed="false">IT</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      </div>
+      <p class="hero-badge" data-i18n="hero_badge">Your guide to Acharavi & Corfu</p>
+      <h1 data-i18n="hero_title">Irene Apartments</h1>
+      <p class="sub" data-i18n="hero_sub">Beaches, food, and local tips — everything you need to make the most of your stay.</p>
       <div class="whats-inside">
-        <span><span class="material-icons">beach_access</span> Beaches</span>
-        <span><span class="material-icons">restaurant</span> Eat & Drink</span>
-        <span><span class="material-icons">explore</span> Things to do</span>
-        <span><span class="material-icons">map</span> Map & tips</span>
+        <span><span class="material-icons">beach_access</span> <span data-i18n="whats_beaches">Beaches</span></span>
+        <span><span class="material-icons">restaurant</span> <span data-i18n="whats_eat">Eat & Drink</span></span>
+        <span><span class="material-icons">explore</span> <span data-i18n="whats_things">Things to do</span></span>
+        <span><span class="material-icons">map</span> <span data-i18n="whats_map">Map & tips</span></span>
       </div>
       <a href="#welcome" class="scroll-wrap" aria-label="Scroll to content">
-        <p class="scroll">Scroll to explore</p>
+        <p class="scroll" data-i18n="scroll_to_explore">Scroll to explore</p>
         <div class="scroll-arrow" aria-hidden="true"></div>
       </a>
     </div>
@@ -1025,13 +1057,13 @@
   <nav>
     <div class="nav-inner">
       <ul>
-        <li><a href="#welcome"><span class="material-icons nav-icon">home</span> Your base</a></li>
-        <li><a href="#beaches"><span class="material-icons nav-icon">beach_access</span> Beaches</a></li>
-        <li><a href="#eat"><span class="material-icons nav-icon">restaurant</span> Eat & Drink</a></li>
-        <li><a href="#activities"><span class="material-icons nav-icon">tour</span> Things to do</a></li>
-        <li><a href="#practical"><span class="material-icons nav-icon">help_outline</span> Need to know</a></li>
-        <li><a href="#discover"><span class="material-icons nav-icon">explore</span> Explore</a></li>
-        <li><a href="#save"><span class="material-icons nav-icon">bookmark</span> Save</a></li>
+        <li><a href="#welcome"><span class="material-icons nav-icon">home</span> <span data-i18n="nav_home">Your base</span></a></li>
+        <li><a href="#beaches"><span class="material-icons nav-icon">beach_access</span> <span data-i18n="nav_beaches">Beaches</span></a></li>
+        <li><a href="#eat"><span class="material-icons nav-icon">restaurant</span> <span data-i18n="nav_eat">Eat & Drink</span></a></li>
+        <li><a href="#activities"><span class="material-icons nav-icon">tour</span> <span data-i18n="nav_things">Things to do</span></a></li>
+        <li><a href="#practical"><span class="material-icons nav-icon">help_outline</span> <span data-i18n="nav_need">Need to know</span></a></li>
+        <li><a href="#discover"><span class="material-icons nav-icon">explore</span> <span data-i18n="nav_explore">Explore</span></a></li>
+        <li><a href="#save"><span class="material-icons nav-icon">bookmark</span> <span data-i18n="nav_save">Save</span></a></li>
       </ul>
     </div>
   </nav>
@@ -1039,16 +1071,16 @@
   <main class="content">
   <section id="acharavi" class="reveal">
     <div class="section-content">
-      <p id="welcome" class="welcome-text">Welcome! We're glad you're here and we're always happy to help with tips and bookings.</p>
+      <p id="welcome" class="welcome-text" data-i18n="welcome_text">Welcome! We're glad you're here and we're always happy to help with tips and bookings.</p>
     </div>
   </section>
 
   <section id="beaches" class="reveal">
     <div class="section-content">
       <div class="section-title-bg">
-        <h2>Hit the beach</h2>
+        <h2 data-i18n="beaches_title">Hit the beach</h2>
       </div>
-      <p>Highlights close to Acharavi and a short drive away.</p>
+      <p data-i18n="beaches_intro">Highlights close to Acharavi and a short drive away.</p>
       <div class="beach-carousel-wrap">
       <button type="button" class="carousel-arrow" id="beachPrev" aria-label="Previous beach">&#10094;</button>
       <button type="button" class="carousel-arrow" id="beachNext" aria-label="Next beach">&#10095;</button>
@@ -1123,9 +1155,9 @@
   <section id="eat" class="reveal">
     <div class="section-content">
       <div class="section-title-bg">
-        <h2>Eat & Drink</h2>
+        <h2 data-i18n="eat_title">Eat & Drink</h2>
       </div>
-      <p>All suggestions below are in and around Acharavi.</p>
+      <p data-i18n="eat_intro">All suggestions below are in and around Acharavi.</p>
       <div class="eat-grid">
       <div class="eat-card coffee">
         <div class="eat-card-icon" aria-hidden="true"><span class="material-icons">free_breakfast</span></div>
@@ -1182,7 +1214,7 @@
   <section id="activities" class="reveal">
     <div class="section-content">
       <div class="section-title-bg">
-        <h2>Things to do</h2>
+        <h2 data-i18n="activities_title">Things to do</h2>
       </div>
       <div class="activities-grid">
       <a href="#" class="activity-link">
@@ -1204,57 +1236,57 @@
   <section id="practical" class="reveal">
     <div class="section-content">
       <div class="section-title-bg">
-        <h2>Need to know</h2>
+        <h2 data-i18n="practical_title">Need to know</h2>
       </div>
       <div class="card contact-card" style="margin-bottom: 1.25rem;">
-      <h3>Irene Apartments — Need help?</h3>
-      <p class="meta">Acharavi 490 81 · <a href="mailto:info@irene-acharavi.gr">info@irene-acharavi.gr</a></p>
+      <h3 data-i18n="contact_title">Irene Apartments — Need help?</h3>
+      <p class="meta" data-i18n="contact_meta">Acharavi 490 81 · <a href="mailto:info@irene-acharavi.gr">info@irene-acharavi.gr</a></p>
       <div class="contact-cta">
-        <a href="tel:+306976447997"><span class="material-icons">call</span> Call Us</a>
-        <a href="https://www.google.com/maps/search/Acharavi+Corfu+Greece" target="_blank" rel="noopener" class="secondary"><span class="material-icons">map</span> Open in Maps</a>
+        <a href="tel:+306976447997"><span class="material-icons">call</span> <span data-i18n="call_us">Call Us</span></a>
+        <a href="https://www.google.com/maps/search/Acharavi+Corfu+Greece" target="_blank" rel="noopener" class="secondary"><span class="material-icons">map</span> <span data-i18n="open_maps">Open in Maps</span></a>
         <a href="https://irenecorfu.com/" target="_blank" rel="noopener" class="secondary">irenecorfu.com →</a>
       </div>
     </div>
     <div class="practical-list">
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">directions_bus</span></span>
-        <div class="practical-text"><strong>Buses:</strong> Green buses (KTEL) run to/from Corfu Town. <a href="https://ktelkerkyras.gr/en/itinerary/" target="_blank" rel="noopener">Official timetable (KTEL Corfu)</a> · Or ask reception.</div>
+        <div class="practical-text" data-i18n="p_buses"><strong>Buses:</strong> Green buses (KTEL) run to/from Corfu Town. <a href="https://ktelkerkyras.gr/en/itinerary/" target="_blank" rel="noopener">Official timetable (KTEL Corfu)</a> · Or ask reception.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">two_wheeler</span></span>
-        <div class="practical-text"><strong>Car / scooter:</strong> We can arrange rentals for you — ask at reception. Ideal for exploring the north and the rest of the island.</div>
+        <div class="practical-text" data-i18n="p_car"><strong>Car / scooter:</strong> We can arrange rentals for you — ask at reception. Ideal for exploring the north and the rest of the island.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">local_pharmacy</span></span>
-        <div class="practical-text"><strong>Pharmacies & ATM:</strong> In Acharavi centre.</div>
+        <div class="practical-text" data-i18n="p_pharmacy"><strong>Pharmacies & ATM:</strong> In Acharavi centre.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">emergency</span></span>
-        <div class="practical-text"><strong>Emergency:</strong> European emergency number <strong>112</strong>. For medical help, ask reception or at the pharmacy.</div>
+        <div class="practical-text" data-i18n="p_emergency"><strong>Emergency:</strong> European emergency number <strong>112</strong>. For medical help, ask reception or at the pharmacy.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">water_drop</span></span>
-        <div class="practical-text"><strong>Water:</strong> Tap water is generally not for drinking; use bottled water.</div>
+        <div class="practical-text" data-i18n="p_water"><strong>Water:</strong> Tap water is generally not for drinking; use bottled water.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">route</span></span>
-        <div class="practical-text"><strong>Roads:</strong> Be careful on the roads — many lanes are narrow, and scooters and bikes are common. Drive on the right.</div>
+        <div class="practical-text" data-i18n="p_roads"><strong>Roads:</strong> Be careful on the roads — many lanes are narrow, and scooters and bikes are common. Drive on the right.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">bug_report</span></span>
-        <div class="practical-text"><strong>Mosquitoes:</strong> They can be around, especially in the evening. Repellent and plug-in deterrents help; you can buy them at the pharmacy or supermarket.</div>
+        <div class="practical-text" data-i18n="p_mosquitoes"><strong>Mosquitoes:</strong> They can be around, especially in the evening. Repellent and plug-in deterrents help; you can buy them at the pharmacy or supermarket.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">bathroom</span></span>
-        <div class="practical-text"><strong>Toilets:</strong> In all places in Greece you don’t flush toilet paper — use the bin next to the toilet. This is normal and helps avoid blockages.</div>
+        <div class="practical-text" data-i18n="p_toilets"><strong>Toilets:</strong> In all places in Greece you don’t flush toilet paper — use the bin next to the toilet. This is normal and helps avoid blockages.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">payments</span></span>
-        <div class="practical-text"><strong>Cash:</strong> Many tavernas and small shops prefer or only take cash. There’s an ATM in Acharavi centre.</div>
+        <div class="practical-text" data-i18n="p_cash"><strong>Cash:</strong> Many tavernas and small shops prefer or only take cash. There’s an ATM in Acharavi centre.</div>
       </div>
       <div class="practical-item">
         <span class="practical-icon" aria-hidden="true"><span class="material-icons">translate</span></span>
-        <div class="practical-text"><strong>Few Greek words:</strong> <em>Kalimera</em> (good morning), <em>Efharisto</em> (thank you), <em>Parakalo</em> (please / you’re welcome). Greeks appreciate the effort.</div>
+        <div class="practical-text" data-i18n="p_greek"><strong>Few Greek words:</strong> <em>Kalimera</em> (good morning), <em>Efharisto</em> (thank you), <em>Parakalo</em> (please / you’re welcome). Greeks appreciate the effort.</div>
       </div>
     </div>
     </div>
@@ -1263,24 +1295,24 @@
   <section id="discover" class="reveal">
     <div class="section-content">
       <div class="section-title-bg">
-        <h2>Explore the island</h2>
+        <h2 data-i18n="discover_title">Explore the island</h2>
       </div>
-      <p>Corfu has a rich mix of history, culture, and nature — UNESCO sites, museums, villages, and stunning coastlines. For detailed guides, events, and inspiration, the official site is an excellent resource.</p>
-      <p><a href="https://visit.corfu.gr/" target="_blank" rel="noopener" class="btn">Explore visit.corfu.gr →</a></p>
-      <p style="margin-top: 1.5rem; font-size: 0.95rem;">Highlights worth a trip: <strong>Corfu Old Town</strong> (UNESCO), <strong>Paleokastritsa</strong>, <strong>Achilleion Palace</strong>, <strong>Canal d’Amour</strong>, and <strong>Pontikonisi</strong>.</p>
+      <p data-i18n="discover_p1">Corfu has a rich mix of history, culture, and nature — UNESCO sites, museums, villages, and stunning coastlines. For detailed guides, events, and inspiration, the official site is an excellent resource.</p>
+      <p><a href="https://visit.corfu.gr/" target="_blank" rel="noopener" class="btn" data-i18n="discover_btn">Explore visit.corfu.gr →</a></p>
+      <p style="margin-top: 1.5rem; font-size: 0.95rem;" data-i18n="discover_highlights">Highlights worth a trip: <strong>Corfu Old Town</strong> (UNESCO), <strong>Paleokastritsa</strong>, <strong>Achilleion Palace</strong>, <strong>Canal d’Amour</strong>, and <strong>Pontikonisi</strong>.</p>
     </div>
   </section>
 
   <section id="save" class="reveal">
     <div class="section-content">
       <div class="section-title-bg">
-        <h2>Save this guide</h2>
+        <h2 data-i18n="save_title">Save this guide</h2>
       </div>
-      <p style="margin-bottom: 0.75rem;">Keep the guide one tap away — add it to your home screen or bookmark it.</p>
+      <p style="margin-bottom: 0.75rem;" data-i18n="save_intro">Keep the guide one tap away — add it to your home screen or bookmark it.</p>
       <ul class="save-guide-steps">
-        <li><strong>iPhone:</strong> Open in Safari → tap the <strong>Share</strong> button (square with arrow) → <strong>Add to Home Screen</strong>. The guide will appear as an icon and open at the top.</li>
-        <li><strong>Android:</strong> Open in Chrome → tap the <strong>⋮</strong> menu → <strong>Add to Home screen</strong> or <strong>Install app</strong>. Same idea — one tap from your home screen.</li>
-        <li><strong>Desktop:</strong> <strong>Bookmark</strong> the page (Ctrl+D / Cmd+D) or use your browser's "Save" or star icon so you can open it from your bookmarks anytime.</li>
+        <li data-i18n="save_iphone"><strong>iPhone:</strong> Open in Safari → tap the <strong>Share</strong> button (square with arrow) → <strong>Add to Home Screen</strong>. The guide will appear as an icon and open at the top.</li>
+        <li data-i18n="save_android"><strong>Android:</strong> Open in Chrome → tap the <strong>⋮</strong> menu → <strong>Add to Home screen</strong> or <strong>Install app</strong>. Same idea — one tap from your home screen.</li>
+        <li data-i18n="save_desktop"><strong>Desktop:</strong> <strong>Bookmark</strong> the page (Ctrl+D / Cmd+D) or use your browser's "Save" or star icon so you can open it from your bookmarks anytime.</li>
       </ul>
     </div>
   </section>
@@ -1289,21 +1321,164 @@
     <div class="map-wrap">
       <iframe src="https://maps.google.com/maps?q=Acharavi+Corfu+Greece&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Acharavi, Corfu on map"></iframe>
     </div>
-    <p class="map-caption"><a href="https://www.google.com/maps/search/Acharavi+Corfu+Greece" target="_blank" rel="noopener">View larger map</a></p>
+    <p class="map-caption"><a href="https://www.google.com/maps/search/Acharavi+Corfu+Greece" target="_blank" rel="noopener" data-i18n="map_caption">View larger map</a></p>
   </div>
 
   </main>
 
   <footer>
-    <p><strong>Irene Apartments</strong> — Acharavi, Corfu</p>
-    <p>Thank you for staying with us. Make the most of every day — beach, food, and adventure are right here.</p>
-    <p><a href="https://irenecorfu.com/" target="_blank" rel="noopener">irenecorfu.com</a> · <a href="https://visit.corfu.gr/" target="_blank" rel="noopener">visit.corfu.gr</a> — Discover the island</p>
-    <p class="footer-hint">Save this page to your home screen for quick access. We’d love to see your photos — share your stay with us.</p>
+    <p data-i18n="footer_1"><strong>Irene Apartments</strong> — Acharavi, Corfu</p>
+    <p data-i18n="footer_2">Thank you for staying with us. Make the most of every day — beach, food, and adventure are right here.</p>
+    <p data-i18n="footer_3"><a href="https://irenecorfu.com/" target="_blank" rel="noopener">irenecorfu.com</a> · <a href="https://visit.corfu.gr/" target="_blank" rel="noopener">visit.corfu.gr</a> — Discover the island</p>
+    <p class="footer-hint" data-i18n="footer_hint">Save this page to your home screen for quick access. We’d love to see your photos — share your stay with us.</p>
   </footer>
 
   <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top"><span class="material-icons">arrow_upward</span></button>
 
   <script>
+    (function() {
+      var T = {
+        en: {
+          hero_badge: "Your guide to Acharavi & Corfu",
+          hero_title: "Irene Apartments",
+          hero_sub: "Beaches, food, and local tips — everything you need to make the most of your stay.",
+          whats_beaches: "Beaches", whats_eat: "Eat & Drink", whats_things: "Things to do", whats_map: "Map & tips",
+          scroll_to_explore: "Scroll to explore",
+          nav_home: "Your base", nav_beaches: "Beaches", nav_eat: "Eat & Drink", nav_things: "Things to do",
+          nav_need: "Need to know", nav_explore: "Explore", nav_save: "Save",
+          welcome_text: "Welcome! We're glad you're here and we're always happy to help with tips and bookings.",
+          beaches_title: "Hit the beach", beaches_intro: "Highlights close to Acharavi and a short drive away.",
+          eat_title: "Eat & Drink", eat_intro: "All suggestions below are in and around Acharavi.",
+          activities_title: "Things to do",
+          practical_title: "Need to know",
+          contact_title: "Irene Apartments — Need help?",
+          contact_meta: "Acharavi 490 81 · <a href=\"mailto:info@irene-acharavi.gr\">info@irene-acharavi.gr</a>",
+          call_us: "Call Us", open_maps: "Open in Maps",
+          p_buses: "<strong>Buses:</strong> Green buses (KTEL) run to/from Corfu Town. <a href=\"https://ktelkerkyras.gr/en/itinerary/\" target=\"_blank\" rel=\"noopener\">Official timetable (KTEL Corfu)</a> · Or ask reception.",
+          p_car: "<strong>Car / scooter:</strong> We can arrange rentals for you — ask at reception. Ideal for exploring the north and the rest of the island.",
+          p_pharmacy: "<strong>Pharmacies & ATM:</strong> In Acharavi centre.",
+          p_emergency: "<strong>Emergency:</strong> European emergency number <strong>112</strong>. For medical help, ask reception or at the pharmacy.",
+          p_water: "<strong>Water:</strong> Tap water is generally not for drinking; use bottled water.",
+          p_roads: "<strong>Roads:</strong> Be careful on the roads — many lanes are narrow, and scooters and bikes are common. Drive on the right.",
+          p_mosquitoes: "<strong>Mosquitoes:</strong> They can be around, especially in the evening. Repellent and plug-in deterrents help; you can buy them at the pharmacy or supermarket.",
+          p_toilets: "<strong>Toilets:</strong> In all places in Greece you don't flush toilet paper — use the bin next to the toilet. This is normal and helps avoid blockages.",
+          p_cash: "<strong>Cash:</strong> Many tavernas and small shops prefer or only take cash. There's an ATM in Acharavi centre.",
+          p_greek: "<strong>Few Greek words:</strong> <em>Kalimera</em> (good morning), <em>Efharisto</em> (thank you), <em>Parakalo</em> (please / you're welcome). Greeks appreciate the effort.",
+          discover_title: "Explore the island",
+          discover_p1: "Corfu has a rich mix of history, culture, and nature — UNESCO sites, museums, villages, and stunning coastlines. For detailed guides, events, and inspiration, the official site is an excellent resource.",
+          discover_btn: "Explore visit.corfu.gr →",
+          discover_highlights: "Highlights worth a trip: <strong>Corfu Old Town</strong> (UNESCO), <strong>Paleokastritsa</strong>, <strong>Achilleion Palace</strong>, <strong>Canal d'Amour</strong>, and <strong>Pontikonisi</strong>.",
+          save_title: "Save this guide", save_intro: "Keep the guide one tap away — add it to your home screen or bookmark it.",
+          save_iphone: "<strong>iPhone:</strong> Open in Safari → tap the <strong>Share</strong> button (square with arrow) → <strong>Add to Home Screen</strong>. The guide will appear as an icon and open at the top.",
+          save_android: "<strong>Android:</strong> Open in Chrome → tap the <strong>⋮</strong> menu → <strong>Add to Home screen</strong> or <strong>Install app</strong>. Same idea — one tap from your home screen.",
+          save_desktop: "<strong>Desktop:</strong> <strong>Bookmark</strong> the page (Ctrl+D / Cmd+D) or use your browser's \"Save\" or star icon so you can open it from your bookmarks anytime.",
+          map_caption: "View larger map",
+          footer_1: "<strong>Irene Apartments</strong> — Acharavi, Corfu",
+          footer_2: "Thank you for staying with us. Make the most of every day — beach, food, and adventure are right here.",
+          footer_3: "<a href=\"https://irenecorfu.com/\" target=\"_blank\" rel=\"noopener\">irenecorfu.com</a> · <a href=\"https://visit.corfu.gr/\" target=\"_blank\" rel=\"noopener\">visit.corfu.gr</a> — Discover the island",
+          footer_hint: "Save this page to your home screen for quick access. We'd love to see your photos — share your stay with us."
+        },
+        it: {
+          hero_badge: "La tua guida ad Acharavi e Corfù",
+          hero_title: "Irene Apartments",
+          hero_sub: "Spiagge, cibo e consigli locali — tutto ciò che serve per goderti il soggiorno.",
+          whats_beaches: "Spiagge", whats_eat: "Mangiare e bere", whats_things: "Cose da fare", whats_map: "Mappa e info",
+          scroll_to_explore: "Scorri per esplorare",
+          nav_home: "La tua base", nav_beaches: "Spiagge", nav_eat: "Mangiare e bere", nav_things: "Cose da fare",
+          nav_need: "Da sapere", nav_explore: "Esplora", nav_save: "Salva",
+          welcome_text: "Benvenuti! Siamo felici che siate qui e siamo sempre disponibili per consigli e prenotazioni.",
+          beaches_title: "Le spiagge", beaches_intro: "Alcune spiagge vicino ad Acharavi e a breve distanza in auto.",
+          eat_title: "Mangiare e bere", eat_intro: "Tutti i suggerimenti qui sotto sono ad Acharavi e dintorni.",
+          activities_title: "Cose da fare",
+          practical_title: "Da sapere",
+          contact_title: "Irene Apartments — Serve aiuto?",
+          contact_meta: "Acharavi 490 81 · <a href=\"mailto:info@irene-acharavi.gr\">info@irene-acharavi.gr</a>",
+          call_us: "Chiamaci", open_maps: "Apri in Mappe",
+          p_buses: "<strong>Autobus:</strong> I bus verdi (KTEL) collegano Corfù town. <a href=\"https://ktelkerkyras.gr/en/itinerary/\" target=\"_blank\" rel=\"noopener\">Orari (KTEL Corfu)</a> · Oppure chiedi in reception.",
+          p_car: "<strong>Auto / scooter:</strong> Possiamo organizzare noleggi — chiedi in reception. Ideale per esplorare il nord e l'isola.",
+          p_pharmacy: "<strong>Farmacie e bancomat:</strong> Nel centro di Acharavi.",
+          p_emergency: "<strong>Emergenze:</strong> Numero unico europeo <strong>112</strong>. Per assistenza medica, chiedi in reception o in farmacia.",
+          p_water: "<strong>Acqua:</strong> L'acqua del rubinetto in genere non è potabile; usa acqua in bottiglia.",
+          p_roads: "<strong>Strade:</strong> Attenzione — molte strade sono strette, motorini e bici sono comuni. Si guida a destra.",
+          p_mosquitoes: "<strong>Zanzare:</strong> Possono esserci, soprattutto la sera. Repellente e zampironi; si trovano in farmacia o al supermercato.",
+          p_toilets: "<strong>Servizi:</strong> In tutta la Grecia non si getta la carta nel water — usa il cestino. È normale ed evita intasamenti.",
+          p_cash: "<strong>Contanti:</strong> Molte taverne e negozi preferiscono o accettano solo contanti. C'è un bancomat nel centro di Acharavi.",
+          p_greek: "<strong>Qualche parola in greco:</strong> <em>Kalimera</em> (buongiorno), <em>Efharisto</em> (grazie), <em>Parakalo</em> (prego). I greci apprezzano lo sforzo.",
+          discover_title: "Esplora l'isola",
+          discover_p1: "Corfù offre storia, cultura e natura — siti UNESCO, musei, villaggi e coste stupende. Per guide, eventi e idee, il sito ufficiale è un'ottima risorsa.",
+          discover_btn: "Esplora visit.corfu.gr →",
+          discover_highlights: "Da non perdere: <strong>Corfù Old Town</strong> (UNESCO), <strong>Paleokastritsa</strong>, <strong>Palazzo Achilleion</strong>, <strong>Canal d'Amour</strong> e <strong>Pontikonisi</strong>.",
+          save_title: "Salva questa guida", save_intro: "Tieni la guida a portata di tap — aggiungila alla home o ai segnalibri.",
+          save_iphone: "<strong>iPhone:</strong> Apri in Safari → tocca <strong>Condividi</strong> (icona con freccia) → <strong>Aggiungi a Home</strong>. La guida apparirà come icona.",
+          save_android: "<strong>Android:</strong> Apri in Chrome → menu <strong>⋮</strong> → <strong>Aggiungi a Home</strong> o <strong>Installa app</strong>. Un tap dalla home.",
+          save_desktop: "<strong>Desktop:</strong> <strong>Segnalibro</strong> (Ctrl+D / Cmd+D) o usa l'icona \"Salva\" / stella del browser.",
+          map_caption: "Mappa più grande",
+          footer_1: "<strong>Irene Apartments</strong> — Acharavi, Corfù",
+          footer_2: "Grazie per aver soggiornato da noi. Goditi ogni giorno — spiaggia, cibo e avventura sono qui.",
+          footer_3: "<a href=\"https://irenecorfu.com/\" target=\"_blank\" rel=\"noopener\">irenecorfu.com</a> · <a href=\"https://visit.corfu.gr/\" target=\"_blank\" rel=\"noopener\">visit.corfu.gr</a> — Scopri l'isola",
+          footer_hint: "Salva questa pagina nella home per averla a portata di mano. Ci piacerebbe vedere le tue foto — condividi il soggiorno con noi."
+        },
+        de: {
+          hero_badge: "Ihr Reiseführer für Acharavi & Korfu",
+          hero_title: "Irene Apartments",
+          hero_sub: "Strände, Essen und Tipps — alles für einen gelungenen Aufenthalt.",
+          whats_beaches: "Strände", whats_eat: "Essen & Trinken", whats_things: "Aktivitäten", whats_map: "Karte & Tipps",
+          scroll_to_explore: "Scrollen zum Entdecken",
+          nav_home: "Ihre Basis", nav_beaches: "Strände", nav_eat: "Essen & Trinken", nav_things: "Aktivitäten",
+          nav_need: "Wissenswertes", nav_explore: "Entdecken", nav_save: "Speichern",
+          welcome_text: "Willkommen! Wir freuen uns, dass Sie da sind, und helfen gern mit Tipps und Buchungen.",
+          beaches_title: "Strände", beaches_intro: "Strände in der Nähe von Acharavi und mit kurzer Fahrt erreichbar.",
+          eat_title: "Essen & Trinken", eat_intro: "Alle Tipps unten sind in und um Acharavi.",
+          activities_title: "Aktivitäten",
+          practical_title: "Wissenswertes",
+          contact_title: "Irene Apartments — Brauchen Sie Hilfe?",
+          contact_meta: "Acharavi 490 81 · <a href=\"mailto:info@irene-acharavi.gr\">info@irene-acharavi.gr</a>",
+          call_us: "Anrufen", open_maps: "In Karten öffnen",
+          p_buses: "<strong>Busse:</strong> Grüne Busse (KTEL) fahren nach/von Korfu-Stadt. <a href=\"https://ktelkerkyras.gr/en/itinerary/\" target=\"_blank\" rel=\"noopener\">Fahrplan (KTEL Korfu)</a> · Oder an der Rezeption fragen.",
+          p_car: "<strong>Auto / Roller:</strong> Wir können Mieten organisieren — fragen Sie an der Rezeption. Ideal für Norden und Insel.",
+          p_pharmacy: "<strong>Apotheken & Geldautomat:</strong> Im Zentrum von Acharavi.",
+          p_emergency: "<strong>Notfall:</strong> Europäische Notrufnummer <strong>112</strong>. Bei medizinischer Hilfe Rezeption oder Apotheke fragen.",
+          p_water: "<strong>Wasser:</strong> Leitungswasser ist meist nicht zum Trinken; Flaschenwasser verwenden.",
+          p_roads: "<strong>Straßen:</strong> Vorsicht — viele Straßen sind schmal, Roller und Räder häufig. Rechts fahren.",
+          p_mosquitoes: "<strong>Mücken:</strong> Besonders abends. Mückenspray und Stecker helfen; in Apotheke oder Supermarkt.",
+          p_toilets: "<strong>Toiletten:</strong> In ganz Griechenland wirft man kein Toilettenpapier ins Klo — in den Eimer daneben. Das ist üblich und beugt Verstopfungen vor.",
+          p_cash: "<strong>Bargeld:</strong> Viele Tavernen und Läden bevorzugen oder nehmen nur Bargeld. Geldautomat in Acharavi Zentrum.",
+          p_greek: "<strong>Ein paar griechische Wörter:</strong> <em>Kalimera</em> (Guten Morgen), <em>Efharisto</em> (Danke), <em>Parakalo</em> (Bitte). Griechen freuen sich über den Einsatz.",
+          discover_title: "Die Insel entdecken",
+          discover_p1: "Korfu verbindet Geschichte, Kultur und Natur — UNESCO-Stätten, Museen, Dörfer und Küsten. Für Führer, Events und Inspiration ist die offizielle Seite eine gute Quelle.",
+          discover_btn: "visit.corfu.gr entdecken →",
+          discover_highlights: "Sehenswert: <strong>Korfu Altstadt</strong> (UNESCO), <strong>Paleokastritsa</strong>, <strong>Achilleion</strong>, <strong>Canal d'Amour</strong> und <strong>Pontikonisi</strong>.",
+          save_title: "Guide speichern", save_intro: "Guide immer griffbereit — zur Startseite hinzufügen oder als Lesezeichen.",
+          save_iphone: "<strong>iPhone:</strong> In Safari öffnen → <strong>Teilen</strong> (Quadrat mit Pfeil) → <strong>Zum Home-Bildschirm</strong>. Die Guide erscheint als App-Symbol.",
+          save_android: "<strong>Android:</strong> In Chrome öffnen → Menü <strong>⋮</strong> → <strong>Zum Startbildschirm</strong> oder <strong>App installieren</strong>. Ein Tipp von zu Hause.",
+          save_desktop: "<strong>Desktop:</strong> <strong>Lesezeichen</strong> setzen (Strg+D / Cmd+D) oder Browser-Symbol „Speichern“ / Stern nutzen.",
+          map_caption: "Größere Karte",
+          footer_1: "<strong>Irene Apartments</strong> — Acharavi, Korfu",
+          footer_2: "Danke für Ihren Aufenthalt. Genießen Sie jeden Tag — Strand, Essen und Abenteuer sind hier.",
+          footer_3: "<a href=\"https://irenecorfu.com/\" target=\"_blank\" rel=\"noopener\">irenecorfu.com</a> · <a href=\"https://visit.corfu.gr/\" target=\"_blank\" rel=\"noopener\">visit.corfu.gr</a> — Insel entdecken",
+          footer_hint: "Diese Seite zur Startseite hinzufügen für schnellen Zugriff. Wir freuen uns über Ihre Fotos — teilen Sie Ihren Aufenthalt mit uns."
+        }
+      };
+      function applyLang(lang) {
+        if (!T[lang]) lang = 'en';
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var k = el.getAttribute('data-i18n');
+          if (T[lang][k] !== undefined) el.innerHTML = T[lang][k];
+        });
+        document.documentElement.setAttribute('lang', lang);
+        document.querySelectorAll('.lang-switcher button').forEach(function(btn) {
+          var L = btn.getAttribute('data-lang');
+          btn.classList.toggle('active', L === lang);
+          btn.setAttribute('aria-pressed', L === lang ? 'true' : 'false');
+        });
+        try { localStorage.setItem('irene-lang', lang); } catch(e) {}
+      }
+      var saved = (function() { try { return localStorage.getItem('irene-lang'); } catch(e) { return null; } })();
+      applyLang(saved === 'it' || saved === 'de' ? saved : 'en');
+      document.querySelectorAll('.lang-switcher button').forEach(function(btn) {
+        btn.addEventListener('click', function() { applyLang(btn.getAttribute('data-lang')); });
+      });
+    })();
     (function() {
       function scrollToWelcomeOnPhone() {
         var el = document.getElementById('welcome');
